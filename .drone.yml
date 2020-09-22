@@ -1,17 +1,11 @@
+kind: pipeline
+name: default
+
 steps:
-- name: publish
-  image: plugins/github-release
+- name: sign  
+  image: plugins/gpgsign
   settings:
-    api_key: d05ebdebf2c9bb7538993f15785296918973e3b8
+    key: your-base64-encoded-private-key
+    passphrase: p455w0rd
     files:
       - dist/*
-      - bin/binary.exe
-   checksum:
-      - md5
-      - sha1
-      - sha256
-      - sha512
-      - adler32
-      - crc32
-  when:
-    event: tag
